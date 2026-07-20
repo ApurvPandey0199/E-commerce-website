@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Corporate Policies | PR Manufacturing Co.</title>
+  <meta name="description" content="Read our company terms and conditions, corporate data privacy policies, and wholesale cargo logistics shipping information.">
+  
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <!-- Dynamic Header -->
+  <header id="global-header"></header>
+
+  <main>
+    <section class="section-padding" style="background-color: #f3f4f6; border-bottom: 1px solid var(--border-color); padding: 50px 0;">
+      <div class="container text-center">
+        <h1 style="font-size: 38px; margin-bottom: 10px;">Corporate Policies</h1>
+        <p style="color: var(--text-muted); font-size: 16px;">Terms, privacy measures, and logistics policies for custom wholesale apparel.</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="policy-layout">
+        
+        <!-- Sidebar Tabs -->
+        <aside>
+          <ul class="policy-tabs">
+            <li><button class="policy-tab-btn active" data-pane="pane-terms">Terms & Conditions</button></li>
+            <li><button class="policy-tab-btn" data-pane="pane-privacy">Privacy Policy</button></li>
+            <li><button class="policy-tab-btn" data-pane="pane-shipping">Shipping & Returns</button></li>
+          </ul>
+        </aside>
+
+        <!-- Right Content Pane -->
+        <section class="policy-content">
+          
+          <!-- Pane 1: Terms -->
+          <div class="policy-pane" id="pane-terms">
+            <h2>Terms & Conditions</h2>
+            <p>Welcome to PR Manufacturing Co. (referred to as "Company," "we," or "our"). These Terms govern all B2B transactions, bulk manufacturing service bookings, and portal interactions.</p>
+            
+            <h3>1. Order Approvals & MOQs</h3>
+            <p>All items placed in the cart are subject to manufacturing thresholds. If an order quantity is submitted below the listed product minimum (MOQ), we reserves the right to hold processing until quantity calibrations are corrected by the buyer.</p>
+            
+            <h3>2. Custom Logo Artwork Permissions</h3>
+            <p>By uploading company logos, embroidery vector designs, or startup print art, the client warrants that they hold full trademark rights and intellectual permissions for the designs. The company acts solely as a physical textile fabrication provider and is not liable for copyright issues.</p>
+            
+            <h3>3. Payment & Invoices</h3>
+            <p>For custom bulk orders, production begins only after payment confirmation. All invoices are subject to 18% standard Indian GST on textiles. Input tax credit claims must be processed by providing corporate GSTIN tags during checkout.</p>
+          </div>
+
+          <!-- Pane 2: Privacy -->
+          <div class="policy-pane" id="pane-privacy" style="display: none;">
+            <h2>Privacy Policy</h2>
+            <p>PR Manufacturing Co. is committed to protecting client database records and intellectual property designs.</p>
+            
+            <h3>1. Corporate Data Encryption</h3>
+            <p>Your company registrations, delivery addresses, GST credentials, and phone numbers are encrypted and stored securely inside our simulated database schemas. We never sell or share B2B contact lists with third-party advertising companies.</p>
+            
+            <h3>2. Design Assets Security</h3>
+            <p>All uploaded vector logos, PNG layouts, and embroidery templates are used exclusively to process fabric print plates. Once print jobs pass factory verification, digital assets are archived securely and never reused for external orders.</p>
+          </div>
+
+          <!-- Pane 3: Shipping -->
+          <div class="policy-pane" id="pane-shipping" style="display: none;">
+            <h2>Shipping & Return Policy</h2>
+            
+            <h3>1. Logistics Delivery</h3>
+            <p>We partner with leading national cargo carriers. Standard deliveries are completed in 3-5 days after dispatch. Orders above ₹15,000 qualify for free standard shipping. For orders below, a flat rate of ₹750 is charged.</p>
+            
+            <h3>2. Returns & Claims for Custom Goods</h3>
+            <p>Due to the customized nature of corporate garments, items containing logo printing or custom embroidery cannot be returned or refunded if client configurations (e.g. wrong size selection) are at fault.</p>
+            <p>If physical fabric damage, sewing defects, or print ink discrepancies are identified as a factory error, contact our QA office within 7 days of delivery. We will remake defective garments at zero additional cost.</p>
+          </div>
+
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Dynamic Footer -->
+  <footer id="global-footer"></footer>
+
+  <!-- Scripts -->
+  <script src="js/db.js"></script>
+  <script src="js/shopify.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Parse active tab parameter
+      const params = new URLSearchParams(window.location.search);
+      const urlTab = params.get("tab");
+      
+      if (urlTab) {
+        let paneId = "pane-terms";
+        if (urlTab === "privacy") paneId = "pane-privacy";
+        else if (urlTab === "shipping") paneId = "pane-shipping";
+        
+        // Update active UI state
+        document.querySelectorAll(".policy-tab-btn").forEach(btn => {
+          btn.classList.remove("active");
+          if (btn.getAttribute("data-pane") === paneId) {
+            btn.classList.add("active");
+          }
+        });
+        
+        document.querySelectorAll(".policy-pane").forEach(pane => {
+          pane.style.display = "none";
+        });
+        document.getElementById(paneId).style.display = "block";
+      }
+
+      // Tab switcher clicks
+      const tabBtns = document.querySelectorAll(".policy-tab-btn");
+      tabBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          tabBtns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          
+          const paneId = btn.getAttribute("data-pane");
+          document.querySelectorAll(".policy-pane").forEach(pane => {
+            pane.style.display = "none";
+          });
+          document.getElementById(paneId).style.display = "block";
+        });
+      });
+    });
+  </script>
+</body>
+</html>

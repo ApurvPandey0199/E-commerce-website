@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Frequently Asked Questions (FAQ) | PR Manufacturing Co.</title>
+  <meta name="description" content="Read answers to common B2B clothing inquiries. Information regarding minimum order quantities, design uploads, screen printing versus embroidery, tax invoicing, and cargo delivery schedules.">
+  
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <!-- Dynamic Header -->
+  <header id="global-header"></header>
+
+  <main>
+    <section class="section-padding" style="background-color: #f3f4f6; border-bottom: 1px solid var(--border-color); padding: 50px 0;">
+      <div class="container text-center">
+        <h1 style="font-size: 38px; margin-bottom: 10px;">Help & FAQs</h1>
+        <p style="color: var(--text-muted); font-size: 16px;">Answers to questions regarding fabric weights, B2B invoicing, and bulk custom designs.</p>
+      </div>
+    </section>
+
+    <div class="container section-padding">
+      <div class="faq-accordion">
+        
+        <!-- Q1 -->
+        <div class="faq-item active">
+          <div class="faq-question">
+            <span>What are your Minimum Order Quantities (MOQ)?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="faq-answer">
+            <p>Our MOQs depend on the apparel category due to setup parameters in our knitting mills and print screen calibrations:</p>
+            <ul>
+              <li>Classic Crewneck T-Shirts: <strong>50 Units</strong></li>
+              <li>Pique Polo Shirts: <strong>30 Units</strong></li>
+              <li>Pullover Hoodies & Outerwear: <strong>25 Units</strong></li>
+              <li>Hospital Scrubs & Uniform Sets: <strong>50 Units</strong></li>
+              <li>Promotional Canvas Tote Bags: <strong>100 Units</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How do you calculate B2B volume discounts?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="faq-answer">
+            <p>Our pricing engine scales down automatically as order volume increases. We offer structural discount tiers: 50-100 units (base tier), 101-500 units (mid tier), and 500+ units (enterprise factory tier). Pricing details are updated instantly in the live calculator on product detail pages.</p>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Which branding customization method should I select?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="faq-answer">
+            <p>We recommend methods based on the fabric type and your design details:</p>
+            <ul>
+              <li><strong>Screen Printing:</strong> Best for large bold graphic designs, event crewnecks, and high quantity promo runs. Exceptionally crisp and wash-durable.</li>
+              <li><strong>Embroidery:</strong> Ideal for corporate pique polos, outerwear storm jackets, and professional chef coats. Adds a premium corporate texture.</li>
+              <li><strong>DTG (Direct-to-Garment) Printing:</strong> Recommended for complex photo designs or small multi-color graphic overlays on cotton shirts.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Do you offer GST compliant invoices for input tax credit?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="faq-answer">
+            <p>Yes. PR Manufacturing Co. is a fully registered entity. If you provide your corporate 15-digit GSTIN ID during checkout, it will be validated and included in your Tax Invoice, enabling your finance department to claim the 18% GST input tax credit (ITC) on the purchase.</p>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>What are your production and logistics dispatch timelines?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="faq-answer">
+            <p>Once sizing parameters are confirmed, design artwork approved, and payment processed, standard orders enter the manufacturing queue. Production typically takes 7-10 business days. Transit shipping takes 3-5 days via B2B cargo logistics depending on your delivery location. Express options are available for urgent campaign deadlines.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Dynamic Footer -->
+  <footer id="global-footer"></footer>
+
+  <!-- Scripts -->
+  <script src="js/db.js"></script>
+  <script src="js/shopify.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Toggle Accordions
+      const faqItems = document.querySelectorAll(".faq-item");
+      faqItems.forEach(item => {
+        item.querySelector(".faq-question").addEventListener("click", () => {
+          const isActive = item.classList.contains("active");
+          
+          faqItems.forEach(i => i.classList.remove("active"));
+          
+          if (!isActive) {
+            item.classList.add("active");
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

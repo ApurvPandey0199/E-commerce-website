@@ -1,0 +1,15 @@
+# Logs & Server Scratch Files
+*.log
+*.zip
+server.ps1
+deploy.ps1
+deploy_public.ps1
+keep_tunnel_alive.ps1
+get_serveo_url.ps1
+deploy_netlify.ps1
+deployed_url.txt
+public_link.txt
+LIVE_URL.txt
+CURRENT_LIVE_URL.txt
+.tempmediaStorage/
+scratch/

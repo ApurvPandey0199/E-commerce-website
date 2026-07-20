@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>My Account | PR Manufacturing Co.</title>
+  <meta name="description" content="View your corporate profile, saved delivery addresses, and past order status history.">
+  
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <!-- Dynamic Header -->
+  <header id="global-header"></header>
+
+  <main>
+    <section class="section-padding" style="background: var(--dark-gradient); color: #FFFFFF; padding: 50px 0;">
+      <div class="container text-center">
+        <h1 style="font-size: 38px; color: #FFFFFF; margin-bottom: 10px;">My Customer Account</h1>
+        <p style="color: var(--text-light); font-size: 16px;">Manage your profile, saved shipping locations, and order status histories.</p>
+      </div>
+    </section>
+
+    <div class="container section-padding" id="account-main-container">
+      <div style="display: grid; grid-template-columns: 280px 1fr; gap: 40px;">
+        
+        <!-- Sidebar User Card -->
+        <aside>
+          <div style="background: var(--bg-white); padding: 25px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); text-align: center;">
+            <div style="width: 70px; height: 70px; border-radius: 50%; background: var(--primary); color: #FFFFFF; font-size: 28px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;" id="acc-avatar-icon">U</div>
+            <h3 style="font-size: 18px;" id="acc-user-name">Loading...</h3>
+            <p style="font-size: 13px; color: var(--text-muted);" id="acc-user-email">email@example.com</p>
+            <span class="category-badge" style="background: var(--accent); color: #FFFFFF; margin-top: 10px; display: inline-block;" id="acc-role-badge">Customer Account</span>
+
+            <hr style="margin: 20px 0; border: none; height: 1px; background: var(--border-color);">
+
+            <div style="display: flex; flex-direction: column; gap: 10px; text-align: left;">
+              <button class="btn btn-secondary acc-tab-btn active" data-target="sec-acc-orders" style="width: 100%; justify-content: flex-start;">📦 My Orders</button>
+              <button class="btn btn-secondary acc-tab-btn" data-target="sec-acc-addresses" style="width: 100%; justify-content: flex-start;">📍 Saved Addresses</button>
+              <button class="btn btn-secondary acc-tab-btn" data-target="sec-acc-profile" style="width: 100%; justify-content: flex-start;">👤 Profile Details</button>
+              <button class="btn btn-outline" id="acc-logout-btn" style="width: 100%; margin-top: 10px; color: #EF4444; border-color: #EF4444;">Log Out</button>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Right Content Section -->
+        <section style="background: var(--bg-white); padding: 35px; border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+          
+          <!-- Orders Tab -->
+          <div class="acc-sec-panel" id="sec-acc-orders">
+            <h2 style="font-size: 22px; margin-bottom: 20px; color: var(--primary);">Order History & Status</h2>
+            
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+              <thead>
+                <tr style="background: var(--bg-light); text-align: left;">
+                  <th style="padding: 12px;">Order Ref</th>
+                  <th style="padding: 12px;">Date</th>
+                  <th style="padding: 12px;">Total</th>
+                  <th style="padding: 12px;">Status</th>
+                  <th style="padding: 12px; text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="acc-orders-table-body">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Saved Addresses Tab -->
+          <div class="acc-sec-panel" id="sec-acc-addresses" style="display: none;">
+            <h2 style="font-size: 22px; margin-bottom: 20px; color: var(--primary);">Saved Delivery Locations</h2>
+            <div id="acc-addresses-list">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Profile Details Tab -->
+          <div class="acc-sec-panel" id="sec-acc-profile" style="display: none;">
+            <h2 style="font-size: 22px; margin-bottom: 20px; color: var(--primary);">Corporate Profile Info</h2>
+            <form id="acc-profile-form">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="form-group">
+                  <label class="form-label">Contact Person Name</label>
+                  <input type="text" id="acc-input-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Company Name</label>
+                  <input type="text" id="acc-input-company" class="form-control">
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="form-group">
+                  <label class="form-label">Email Address</label>
+                  <input type="email" id="acc-input-email" class="form-control" disabled style="background: var(--bg-light);">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Phone Number</label>
+                  <input type="tel" id="acc-input-phone" class="form-control">
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-sm">Save Changes</button>
+            </form>
+          </div>
+
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Dynamic Footer -->
+  <footer id="global-footer"></footer>
+
+  <!-- Scripts -->
+  <script src="js/db.js"></script>
+  <script src="js/shopify.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!window.AuthService.isLoggedIn()) {
+        window.location.href = "auth.html";
+        return;
+      }
+
+      renderAccount();
+      setupTabs();
+    });
+
+    function renderAccount() {
+      const user = window.AuthService.getCurrentUser();
+      const displayName = user.contactPerson || user.companyName || user.email.split('@')[0];
+      
+      document.getElementById("acc-user-name").textContent = displayName;
+      document.getElementById("acc-user-email").textContent = user.email;
+      document.getElementById("acc-avatar-icon").textContent = displayName.charAt(0).toUpperCase();
+      document.getElementById("acc-role-badge").textContent = user.role === "admin" ? "Admin Role" : "Customer Account";
+
+      // Form fill
+      document.getElementById("acc-input-name").value = user.contactPerson || "";
+      document.getElementById("acc-input-company").value = user.companyName || "";
+      document.getElementById("acc-input-email").value = user.email;
+      document.getElementById("acc-input-phone").value = user.phone || "";
+
+      // Render Orders
+      const orders = window.PR_DB.getOrders().filter(o => o.userEmail.toLowerCase() === user.email.toLowerCase() || user.role === "admin");
+      const ordersTbody = document.getElementById("acc-orders-table-body");
+      
+      if (orders.length === 0) {
+        ordersTbody.innerHTML = `<tr><td colspan="5" class="text-center text-muted" style="padding: 30px;">No order history found.</td></tr>`;
+      } else {
+        ordersTbody.innerHTML = orders.map(o => `
+          <tr style="border-bottom: 1px solid var(--border-color);">
+            <td style="padding: 12px;"><strong>${o.id}</strong></td>
+            <td style="padding: 12px;">${o.date}</td>
+            <td style="padding: 12px; font-weight: 600;">₹${o.total.toLocaleString()}</td>
+            <td style="padding: 12px;"><span class="category-badge" style="background: var(--primary); color: #FFF;">${o.status}</span></td>
+            <td style="padding: 12px; text-align: right;">
+              <a href="order.html?id=${o.id}" class="btn btn-secondary btn-sm">Receipt</a>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // Render Addresses
+      const addrList = document.getElementById("acc-addresses-list");
+      const addresses = user.addresses || [user.shippingAddress || "No addresses saved yet."];
+      addrList.innerHTML = addresses.map((addr, idx) => `
+        <div style="background: var(--bg-light); padding: 15px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 10px;">
+          <strong>Address #${idx + 1}:</strong>
+          <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">${addr}</p>
+        </div>
+      `).join('');
+    }
+
+    function setupTabs() {
+      const btns = document.querySelectorAll(".acc-tab-btn");
+      btns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          btns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+
+          const target = btn.getAttribute("data-target");
+          document.querySelectorAll(".acc-sec-panel").forEach(p => p.style.display = "none");
+          document.getElementById(target).style.display = "block";
+        });
+      });
+
+      document.getElementById("acc-logout-btn").addEventListener("click", () => {
+        window.AuthService.logout();
+        window.location.href = "index.html";
+      });
+    }
+  </script>
+</body>
+</html>

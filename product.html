@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Product Details & Customizer | PR Manufacturing Co.</title>
+  <meta name="description" content="View apparel details, fabric specifications, price tiers, and customer reviews. Customize colors, sizing, and artwork printing online.">
+  
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <!-- Dynamic Header -->
+  <header id="global-header"></header>
+
+  <main>
+    <div class="container section-padding">
+      <div class="customizer-layout" id="product-detail-container">
+        
+        <!-- Left Column: Visual Mockup Canvas & Image Gallery -->
+        <div class="mockup-visualizer-sticky">
+          <!-- Canvas Visualizer -->
+          <div class="canvas-container">
+            <canvas id="canvas-mockup"></canvas>
+          </div>
+          
+          <!-- Specifications Table -->
+          <div class="canvas-spec-card" style="margin-top: 20px;">
+            <h3>Product Specifications</h3>
+            <table class="specs-table" id="prod-specs-table" style="width: 100%; margin-top: 10px; font-size: 13px;">
+              <!-- Rendered dynamically -->
+            </table>
+            
+            <h3 style="margin-top: 25px; margin-bottom: 12px; font-size: 15px;">Volume Pricing Tiers</h3>
+            <div class="pricing-tiers-grid" id="prod-pricing-tiers">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Product Details & Customization -->
+        <section class="customizer-details-panel">
+          <div class="prod-meta-header">
+            <span class="showcase-badge" style="background: var(--accent); color: #FFFFFF;" id="prod-category-badge">Category</span>
+            <h1 id="prod-name" style="margin-top: 8px;">Loading...</h1>
+            <p class="subtitle" id="prod-tagline">Loading...</p>
+            
+            <div class="product-rating-row" style="margin-top: 10px;">
+              <span class="star-rating">★★★★★</span>
+              <strong id="prod-rating-val">4.9</strong>
+              <span class="text-muted" id="prod-reviews-count-lbl">(0 reviews)</span>
+            </div>
+          </div>
+          
+          <div class="section-divider"></div>
+          
+          <!-- Color Selector -->
+          <div>
+            <h3 class="customizer-group-title">Select Color: <span id="selected-color-name">Loading...</span></h3>
+            <div class="color-swatches-row" id="color-swatches">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Size Selector -->
+          <div>
+            <h3 class="customizer-group-title">Select Size:</h3>
+            <div class="size-selectors-row" id="size-selectors">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <div class="section-divider"></div>
+
+          <!-- Customization Settings -->
+          <div>
+            <h3 class="customizer-group-title">Branding Customization</h3>
+            
+            <div class="form-group">
+              <label for="print-method" class="form-label">Decoration Method</label>
+              <select id="print-method" class="form-control">
+                <option value="None">Blank / No Custom Print</option>
+                <option value="Screen Print">Screen Printing (+₹20 / pc)</option>
+                <option value="Embroidery">Embroidery Thread (+₹45 / pc)</option>
+                <option value="DTG Print">DTG Direct-to-Garment (+₹35 / pc)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="print-placement" class="form-label">Print Placement</label>
+              <select id="print-placement" class="form-control">
+                <option value="Front Center">Front Center Chest</option>
+                <option value="Left Chest">Left Chest pocket logo</option>
+                <option value="Right Chest">Right Chest logo</option>
+                <option value="Back Center">Back Center large print</option>
+                <option value="Sleeve Left">Left Sleeve brand tag</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Upload Company Logo / Design Art</label>
+              <div class="upload-drag-box" id="logo-upload-zone">
+                <div id="upload-box-content">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                  <p>Drag & Drop logo or <span>Browse</span></p>
+                  <span class="upload-note">Support PNG, JPG, PDF</span>
+                </div>
+              </div>
+              <input type="file" id="logo-file-input" style="display: none;" accept="image/*">
+            </div>
+          </div>
+
+          <div class="section-divider"></div>
+
+          <!-- Product Description -->
+          <div>
+            <h3 class="customizer-group-title">Description & Fabric Details</h3>
+            <p id="prod-desc" style="color: var(--text-muted); font-size: 14px; line-height: 1.7;">Loading...</p>
+          </div>
+
+          <!-- Quantity Selector & Action Buttons -->
+          <div class="realtime-price-widget" style="background: var(--primary); color: #FFFFFF; padding: 25px; border-radius: var(--radius-lg); margin-top: 30px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+              <div>
+                <h3 style="font-size: 16px; color: #FFFFFF;">Order Quantity</h3>
+                <span style="font-size: 12px; color: rgba(255,255,255,0.7);" id="prod-moq">Min 30 Pcs</span>
+              </div>
+              <div class="quantity-input-wrapper">
+                <button type="button" class="qty-btn" id="qty-minus">-</button>
+                <input type="number" id="order-qty" class="qty-input" value="30">
+                <button type="button" class="qty-btn" id="qty-plus">+</button>
+              </div>
+            </div>
+
+            <div class="price-summary-row" style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span>Unit Price:</span>
+              <span class="price-val" id="calc-unit-price" style="font-weight: 700;">₹0</span>
+            </div>
+            
+            <div class="price-summary-row total-row" style="display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 18px; font-weight: 800;">
+              <span>Estimated Subtotal:</span>
+              <span class="price-val" id="calc-total-price" style="color: var(--accent);">₹0</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <button class="btn btn-primary" id="btn-add-to-cart" style="width: 100%;">
+                Add to Cart
+              </button>
+              <button class="btn btn-secondary" id="btn-buy-now" style="width: 100%; font-weight: 700;">
+                Buy Now &rarr;
+              </button>
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+
+      <!-- Reviews & Ratings Section -->
+      <section class="section-padding" style="margin-top: 50px; border-top: 1px solid var(--border-color);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px;">
+          <div>
+            <h2 class="section-title">Customer Reviews</h2>
+            <p class="text-muted">Verified buyer ratings and custom production feedback.</p>
+          </div>
+          <button class="btn btn-primary btn-sm" id="btn-open-review-form">+ Write a Review</button>
+        </div>
+
+        <!-- Review Form Container -->
+        <div id="review-form-panel" style="display: none; background: var(--bg-white); padding: 25px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); margin-bottom: 35px;">
+          <h3 style="font-size: 18px; margin-bottom: 15px;">Submit Product Review</h3>
+          <form id="submit-review-form">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div class="form-group">
+                <label for="rev-author" class="form-label">Your Name</label>
+                <input type="text" id="rev-author" class="form-control" placeholder="e.g. Rajesh Sharma" required>
+              </div>
+              <div class="form-group">
+                <label for="rev-rating" class="form-label">Rating (1 to 5 Stars)</label>
+                <select id="rev-rating" class="form-control" required>
+                  <option value="5">★★★★★ (5 - Excellent)</option>
+                  <option value="4">★★★★☆ (4 - Very Good)</option>
+                  <option value="3">★★★☆☆ (3 - Average)</option>
+                  <option value="2">★★☆☆☆ (2 - Poor)</option>
+                  <option value="1">★☆☆☆☆ (1 - Terrible)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="rev-comment" class="form-label">Review Comment</label>
+              <textarea id="rev-comment" class="form-control" rows="3" placeholder="Share details regarding fabric quality, fit, and print finish..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Post Review</button>
+          </form>
+        </div>
+
+        <div id="reviews-list-container" class="reviews-grid">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- Related Products -->
+      <section class="section-padding" style="border-top: 1px solid var(--border-color);">
+        <h2 class="section-title" style="margin-bottom: 25px;">Related Products</h2>
+        <div class="catalog-grid" id="related-products-grid">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Dynamic Footer -->
+  <footer id="global-footer"></footer>
+
+  <!-- Scripts -->
+  <script src="js/db.js"></script>
+  <script src="js/shopify.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/customizer.js"></script>
+</body>
+</html>

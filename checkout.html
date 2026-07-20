@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Checkout | PR Manufacturing Co.</title>
+  <meta name="description" content="Complete your purchase with shipping details, GST information, and payment options.">
+  
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <!-- Dynamic Header -->
+  <header id="global-header"></header>
+
+  <main>
+    <section class="section-padding" style="background: var(--dark-gradient); color: #FFFFFF; padding: 40px 0;">
+      <div class="container text-center">
+        <h1 style="font-size: 32px; color: #FFFFFF; margin-bottom: 8px;">Order Checkout</h1>
+        <p style="color: var(--text-light); font-size: 15px;">Provide shipping address, payment selection, and complete your order.</p>
+      </div>
+    </section>
+
+    <div class="container section-padding">
+      <form id="checkout-form">
+        <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px;">
+          
+          <!-- Shipping Address & Payment Selection -->
+          <div>
+            <div style="background: var(--bg-white); padding: 30px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); margin-bottom: 30px;">
+              <h2 style="font-size: 20px; margin-bottom: 20px; color: var(--primary);">1. Shipping Address Details</h2>
+              
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="form-group">
+                  <label for="chk-name" class="form-label">Full Name / Contact Person</label>
+                  <input type="text" id="chk-name" class="form-control" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                  <label for="chk-phone" class="form-label">Phone Number (WhatsApp Sync)</label>
+                  <input type="tel" id="chk-phone" class="form-control" required placeholder="+91 98765 43210">
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="form-group">
+                  <label for="chk-email" class="form-label">Email Address</label>
+                  <input type="email" id="chk-email" class="form-control" required placeholder="name@company.com">
+                </div>
+                <div class="form-group">
+                  <label for="chk-company" class="form-label">Company / Institute (Optional)</label>
+                  <input type="text" id="chk-company" class="form-control" placeholder="Acme Inc.">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="chk-gstin" class="form-label">GSTIN ID (Optional for Tax Invoice)</label>
+                <input type="text" id="chk-gstin" class="form-control" placeholder="15-digit GSTIN Number">
+              </div>
+
+              <div class="form-group">
+                <label for="chk-address" class="form-label">Full Delivery Address</label>
+                <textarea id="chk-address" class="form-control" rows="3" required placeholder="Street address, building name, flat number..."></textarea>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                <div class="form-group">
+                  <label for="chk-city" class="form-label">City</label>
+                  <input type="text" id="chk-city" class="form-control" required placeholder="Mumbai">
+                </div>
+                <div class="form-group">
+                  <label for="chk-state" class="form-label">State</label>
+                  <input type="text" id="chk-state" class="form-control" required placeholder="Maharashtra">
+                </div>
+                <div class="form-group">
+                  <label for="chk-pin" class="form-label">Pincode</label>
+                  <input type="text" id="chk-pin" class="form-control" required placeholder="400001">
+                </div>
+              </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div style="background: var(--bg-white); padding: 30px; border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+              <h2 style="font-size: 20px; margin-bottom: 20px; color: var(--primary);">2. Select Payment Method</h2>
+
+              <div class="payment-methods-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                <div class="payment-selector-btn active" data-method="Cash on Delivery (COD)" style="border: 2px solid var(--accent); padding: 15px; border-radius: var(--radius-md); cursor: pointer; text-align: center;">
+                  <strong style="display: block; font-size: 14px;">Cash on Delivery</strong>
+                  <span style="font-size: 11px; color: var(--text-muted);">Pay upon delivery</span>
+                </div>
+
+                <div class="payment-selector-btn" data-method="Razorpay (UPI)" style="border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-md); cursor: pointer; text-align: center;">
+                  <strong style="display: block; font-size: 14px;">UPI QR Code</strong>
+                  <span style="font-size: 11px; color: var(--text-muted);">GPay, PhonePe, Paytm</span>
+                </div>
+
+                <div class="payment-selector-btn" data-method="Credit / Debit Card" style="border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-md); cursor: pointer; text-align: center;">
+                  <strong style="display: block; font-size: 14px;">Credit / Debit Card</strong>
+                  <span style="font-size: 11px; color: var(--text-muted);">Visa, MasterCard</span>
+                </div>
+              </div>
+
+              <!-- UPI Box -->
+              <div id="payment-upi-box" style="display: none; text-align: center; background: var(--bg-light); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                <h4>Scan QR Code via Any UPI App</h4>
+                <div style="width: 140px; height: 140px; background: #FFF; border: 2px solid var(--primary); margin: 15px auto; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--primary);">
+                  [ UPI QR CODE ]
+                </div>
+                <p style="font-size: 12px; color: var(--text-muted);">UPI ID: <code>prmfg@upi</code></p>
+              </div>
+
+              <!-- Card Box -->
+              <div id="payment-card-box" style="display: none; background: var(--bg-light); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                <div class="form-group">
+                  <label class="form-label" style="font-size: 12px;">Cardholder Name</label>
+                  <input type="text" class="form-control" placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-size: 12px;">Card Number</label>
+                  <input type="text" class="form-control" placeholder="4111 2222 3333 4444">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                  <div class="form-group">
+                    <label class="form-label" style="font-size: 12px;">Expiry</label>
+                    <input type="text" class="form-control" placeholder="MM/YY">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" style="font-size: 12px;">CVV</label>
+                    <input type="password" class="form-control" placeholder="***">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Order Summary Side Panel -->
+          <div>
+            <div style="background: var(--bg-white); padding: 30px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); position: sticky; top: 100px;">
+              <h3 style="font-size: 20px; margin-bottom: 20px; color: var(--primary);">Order Items</h3>
+
+              <div id="checkout-items-list" style="margin-bottom: 20px; max-height: 250px; overflow-y: auto;">
+                <!-- Rendered dynamically -->
+              </div>
+
+              <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px;">
+                <span>Subtotal:</span>
+                <span id="chk-subtotal">₹0</span>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; color: var(--text-muted);">
+                <span>GST Tax (18%):</span>
+                <span id="chk-gst">₹0</span>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; color: var(--text-muted);">
+                <span>Shipping:</span>
+                <span id="chk-shipping">₹0</span>
+              </div>
+
+              <hr style="margin: 15px 0; border: none; height: 1px; background: var(--border-color);">
+
+              <div style="display: flex; justify-content: space-between; margin-bottom: 25px; font-size: 22px; font-weight: 800;">
+                <span>Grand Total:</span>
+                <span id="chk-total" style="color: var(--accent);">₹0</span>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 17px; padding: 16px;">
+                Place Order Now
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- Dynamic Footer -->
+  <footer id="global-footer"></footer>
+
+  <!-- Scripts -->
+  <script src="js/db.js"></script>
+  <script src="js/shopify.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  
+  <script>
+    let selectedPaymentMethod = "Cash on Delivery (COD)";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderCheckoutSummary();
+      setupPrefill();
+      setupPaymentSelector();
+    });
+
+    function setupPrefill() {
+      const user = window.AuthService.getCurrentUser();
+      if (user) {
+        document.getElementById("chk-name").value = user.contactPerson || user.companyName || "";
+        document.getElementById("chk-phone").value = user.phone || "";
+        document.getElementById("chk-email").value = user.email || "";
+        document.getElementById("chk-company").value = user.companyName || "";
+        document.getElementById("chk-gstin").value = user.gstin || "";
+        if (user.addresses && user.addresses.length > 0) {
+          document.getElementById("chk-address").value = user.addresses[0];
+        }
+      }
+    }
+
+    function setupPaymentSelector() {
+      const btns = document.querySelectorAll(".payment-selector-btn");
+      btns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          btns.forEach(b => {
+            b.classList.remove("active");
+            b.style.border = "1px solid var(--border-color)";
+          });
+          btn.classList.add("active");
+          btn.style.border = "2px solid var(--accent)";
+
+          selectedPaymentMethod = btn.getAttribute("data-method");
+
+          document.getElementById("payment-upi-box").style.display = selectedPaymentMethod === "Razorpay (UPI)" ? "block" : "none";
+          document.getElementById("payment-card-box").style.display = selectedPaymentMethod === "Credit / Debit Card" ? "block" : "none";
+        });
+      });
+
+      document.getElementById("checkout-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        
+        const cart = window.ShopifyService.getCart();
+        if (cart.length === 0) {
+          alert("Your cart is empty!");
+          window.location.href = "shop.html";
+          return;
+        }
+
+        const name = document.getElementById("chk-name").value;
+        const phone = document.getElementById("chk-phone").value;
+        const email = document.getElementById("chk-email").value;
+        const company = document.getElementById("chk-company").value || "N/A";
+        const gstin = document.getElementById("chk-gstin").value || "N/A";
+        const address = document.getElementById("chk-address").value;
+        const city = document.getElementById("chk-city").value;
+        const state = document.getElementById("chk-state").value;
+        const pin = document.getElementById("chk-pin").value;
+
+        const fullAddress = `${address}, ${city}, ${state} - ${pin}`;
+
+        const checkoutDetails = {
+          email,
+          companyName: company,
+          gstin,
+          contactPerson: name,
+          phone,
+          shippingAddress: fullAddress,
+          paymentMethod: selectedPaymentMethod
+        };
+
+        const result = await window.ShopifyService.submitOrder(checkoutDetails);
+        if (result.success) {
+          window.location.href = `order.html?id=${result.orderId}`;
+        } else {
+          alert("Checkout Error: " + result.error);
+        }
+      });
+    }
+
+    function renderCheckoutSummary() {
+      const cart = window.ShopifyService.getCart();
+      if (cart.length === 0) {
+        window.location.href = "shop.html";
+        return;
+      }
+
+      const summary = window.ShopifyService.getCartSummary();
+      const container = document.getElementById("checkout-items-list");
+
+      container.innerHTML = cart.map(item => `
+        <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 13px;">
+          <div>
+            <strong>${item.name}</strong> (${item.qty} pcs)
+            <div style="color: var(--text-muted); font-size: 11px;">Color: ${item.color} | Size: ${item.size}</div>
+          </div>
+          <span style="font-weight: 600;">₹${(item.price * item.qty).toLocaleString()}</span>
+        </div>
+      `).join('');
+
+      document.getElementById("chk-subtotal").textContent = `₹${summary.subtotal.toLocaleString()}`;
+      document.getElementById("chk-gst").textContent = `₹${summary.gst.toLocaleString()}`;
+      document.getElementById("chk-shipping").textContent = summary.shipping === 0 ? "FREE" : `₹${summary.shipping.toLocaleString()}`;
+      document.getElementById("chk-total").textContent = `₹${summary.total.toLocaleString()}`;
+    }
+  </script>
+</body>
+</html>

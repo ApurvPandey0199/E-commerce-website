@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>B2B Bulk Quote Request | PR Manufacturing Co.</title>
+  <meta name="description" content="Submit a bulk custom clothing order query. Upload your corporate apparel designs, set quantity tiers, delivery deadlines, and receive factory pricing within 2 hours.">
+  
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <!-- Dynamic Header -->
+  <header id="global-header"></header>
+
+  <main>
+    <section class="section-padding" style="background-color: #f3f4f6; border-bottom: 1px solid var(--border-color); padding: 50px 0;">
+      <div class="container text-center">
+        <h1 style="font-size: 38px; margin-bottom: 10px;">Custom B2B Order Desk</h1>
+        <p style="color: var(--text-muted); font-size: 16px;">Have a specific custom design or bulk uniform requirement? Fill out the worksheet below.</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="custom-order-layout">
+        <h2>Request Bulk Custom Quote</h2>
+        <p>Provide specifications, target delivery deadlines, and logo files. Our engineering and design team will draft a structured B2B quote response for your review.</p>
+        
+        <form id="custom-quote-form">
+          <!-- Step 1: Corporate details -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+              <label for="quote-email" class="form-label">Corporate Email Address</label>
+              <input type="email" id="quote-email" class="form-control" required placeholder="name@company.com">
+            </div>
+            <div class="form-group">
+              <label for="quote-company" class="form-label">Company Name</label>
+              <input type="text" id="quote-company" class="form-control" required placeholder="Apex Innovations Pvt Ltd">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px;">
+            <div class="form-group">
+              <label for="quote-contact" class="form-label">Contact Person Name</label>
+              <input type="text" id="quote-contact" class="form-control" required placeholder="Rajesh Sharma">
+            </div>
+            <div class="form-group">
+              <label for="quote-phone" class="form-label">Contact Phone</label>
+              <input type="tel" id="quote-phone" class="form-control" required placeholder="+91 98765 43210">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="quote-gst" class="form-label">GSTIN ID (Optional - for tax invoice rebate)</label>
+            <input type="text" id="quote-gst" class="form-control" placeholder="15-digit GST Number">
+          </div>
+
+          <hr style="margin: 25px 0; border: none; height: 1px; background-color: var(--border-color);">
+
+          <!-- Step 2: Custom Apparel Details -->
+          <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px;">
+            <div class="form-group">
+              <label for="quote-apparel" class="form-label">Apparel Category</label>
+              <select id="quote-apparel" class="form-control" required>
+                <option value="">-- Choose Category --</option>
+                <option value="Classic B2B Crewneck T-Shirt">Corporate Crewneck T-Shirts</option>
+                <option value="Signature Pique Corporate Polo">Pique Collar Polo Shirts</option>
+                <option value="Heavyweight Custom Team Hoodie">Heavyweight Fleece Hoodies</option>
+                <option value="Medical Comfort Fit Scrubs (Set)">Medical/Hospital Scrub Sets</option>
+                <option value="Corporate Softshell Storm Jacket">Storm Outerwear Jackets</option>
+                <option value="Promotional Heavy Canvas Tote Bag">Promotional Canvas Tote Bags</option>
+                <option value="Other / Fully Custom Uniform">Other / Custom School & Industry Uniform</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="quote-qty" class="form-label">Estimated Quantity (Units)</label>
+              <input type="number" id="quote-qty" class="form-control" required min="30" placeholder="Min. 30 Units">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+              <label for="quote-deadline" class="form-label">Required Delivery Deadline</label>
+              <input type="date" id="quote-deadline" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="quote-location" class="form-label">Delivery Location (City/State)</label>
+              <input type="text" id="quote-location" class="form-control" required placeholder="e.g. Hinjewadi, Pune">
+            </div>
+          </div>
+
+          <!-- File Upload and details -->
+          <div class="form-group">
+            <label class="form-label">Upload Design Logo / Brand Artwork</label>
+            <div class="upload-drag-box" id="quote-upload-zone">
+              <div id="quote-upload-content">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                <p>Drag & Drop design file here or <span>Browse</span></p>
+                <span class="upload-note">Support CDR, AI, PDF, PNG, ZIP (Max 15MB)</span>
+              </div>
+            </div>
+            <input type="file" id="quote-file-input" style="display: none;">
+          </div>
+
+          <div class="form-group">
+            <label for="quote-notes" class="form-label">Detailed Fabric, Color, Sizing & Customization Instructions</label>
+            <textarea id="quote-notes" class="form-control" rows="4" required placeholder="Describe fabric specs (e.g. 220 GSM Cotton Pique), color combinations, size divisions breakdown, printing placement, and custom instructions..."></textarea>
+          </div>
+
+          <div style="margin-top: 30px; text-align: right;">
+            <button type="submit" class="btn btn-primary" style="padding: 14px 45px; font-size: 16px;">
+              Submit Quote Request
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Dynamic Footer -->
+  <footer id="global-footer"></footer>
+
+  <!-- Scripts -->
+  <script src="js/db.js"></script>
+  <script src="js/shopify.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  
+  <script>
+    let uploadedLogoUrl = "";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      setupFormControls();
+      
+      // Auto-prefill if user is logged in
+      const user = window.AuthService.getCurrentUser();
+      if (user) {
+        document.getElementById("quote-email").value = user.email;
+        document.getElementById("quote-company").value = user.companyName;
+        document.getElementById("quote-contact").value = user.contactPerson;
+        document.getElementById("quote-phone").value = user.phone;
+        document.getElementById("quote-gst").value = user.gstin;
+      }
+    });
+
+    function setupFormControls() {
+      // File upload handler
+      const zone = document.getElementById("quote-upload-zone");
+      const input = document.getElementById("quote-file-input");
+      
+      zone.addEventListener("click", () => input.click());
+      zone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        zone.classList.add("drag-over");
+      });
+      zone.addEventListener("dragleave", () => zone.classList.remove("drag-over"));
+      zone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        zone.classList.remove("drag-over");
+        if (e.dataTransfer.files.length > 0) {
+          handleFile(e.dataTransfer.files[0]);
+        }
+      });
+      input.addEventListener("change", (e) => {
+        if (e.target.files.length > 0) {
+          handleFile(e.target.files[0]);
+        }
+      });
+
+      // Submit handler
+      document.getElementById("custom-quote-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        
+        const qty = parseInt(document.getElementById("quote-qty").value);
+        if (qty < 30) {
+          showNotification("Minimum order quantity is 30 units.", "error");
+          return;
+        }
+
+        const newQuote = {
+          id: "QT-2026-" + Math.floor(100 + Math.random() * 900),
+          userEmail: document.getElementById("quote-email").value,
+          companyName: document.getElementById("quote-company").value,
+          gstin: document.getElementById("quote-gst").value || "N/A",
+          contactPerson: document.getElementById("quote-contact").value,
+          phone: document.getElementById("quote-phone").value,
+          date: new Date().toISOString().split("T")[0],
+          apparelType: document.getElementById("quote-apparel").value,
+          qty: qty,
+          deadline: document.getElementById("quote-deadline").value,
+          deliveryLocation: document.getElementById("quote-location").value,
+          notes: document.getElementById("quote-notes").value,
+          logoUrl: uploadedLogoUrl || "img/placeholder_logo.png",
+          status: "Pending"
+        };
+
+        // Add to database
+        window.PR_DB.addQuote(newQuote);
+
+        // Show Success Prompt
+        showSuccessModal(newQuote.id);
+      });
+    }
+
+    function handleFile(file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        uploadedLogoUrl = e.target.result;
+        document.getElementById("quote-upload-content").innerHTML = `
+          <div class="upload-success">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>${file.name} Uploaded Successfully</span>
+            <button type="button" class="btn-text" id="clear-logo" style="color:#ef4444; margin-top:5px; font-weight:bold;">Remove</button>
+          </div>
+        `;
+
+        document.getElementById("clear-logo").addEventListener("click", (e) => {
+          e.stopPropagation();
+          clearLogoUpload();
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function clearLogoUpload() {
+      uploadedLogoUrl = "";
+      document.getElementById("quote-upload-content").innerHTML = `
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+        <p>Drag & Drop design file here or <span>Browse</span></p>
+        <span class="upload-note">Support CDR, AI, PDF, PNG, ZIP (Max 15MB)</span>
+      `;
+    }
+
+    function showSuccessModal(quoteId) {
+      const modal = document.createElement("div");
+      modal.className = "custom-modal-backdrop";
+      modal.innerHTML = `
+        <div class="custom-modal-box">
+          <div class="modal-success-icon" style="background-color: rgba(16, 185, 129, 0.1);">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          </div>
+          <h2>Quote Request Submitted!</h2>
+          <p>Quote Query Reference No: <strong>${quoteId}</strong></p>
+          <p class="text-muted">Your custom B2B clothing inquiry has been received. Our sales office will evaluate materials and printing costs, and contact you via email and WhatsApp with pricing inside 2 hours.</p>
+          
+          <div class="modal-actions">
+            <a href="profile.html" class="btn btn-primary">Check Portal Status</a>
+            <button class="btn btn-secondary" onclick="window.location.reload()">New Quote Request</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    function showNotification(msg, type = "success") {
+      const container = document.createElement("div");
+      container.className = `toast-notification ${type}`;
+      container.innerHTML = `<span>${msg}</span>`;
+      document.body.appendChild(container);
+      
+      setTimeout(() => container.classList.add("show"), 100);
+      setTimeout(() => {
+        container.classList.remove("show");
+        setTimeout(() => container.remove(), 300);
+      }, 3500);
+    }
+  </script>
+</body>
+</html>

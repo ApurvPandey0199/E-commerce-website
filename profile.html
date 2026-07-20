@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>B2B Corporate Portal | PR Manufacturing Co.</title>
+  <meta name="description" content="Access your corporate account portal. View order histories, billing profiles, GST parameters, and track custom quotes. Register your business for bulk apparel discounts.">
+  
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <!-- Dynamic Header -->
+  <header id="global-header"></header>
+
+  <main>
+    <section class="section-padding" style="background-color: #f3f4f6; border-bottom: 1px solid var(--border-color); padding: 50px 0;">
+      <div class="container text-center">
+        <h1 style="font-size: 38px; margin-bottom: 10px;">Corporate Account Desk</h1>
+        <p style="color: var(--text-muted); font-size: 16px;">Log in or register to check pricing logs, download B2B invoices, and place re-orders.</p>
+      </div>
+    </section>
+
+    <div class="container">
+      
+      <!-- Guest Portal: Authentication Forms -->
+      <div class="b2b-portal-layout" id="b2b-auth-portal" style="display: none;">
+        <!-- Card 1: Corporate Login -->
+        <div class="b2b-auth-card">
+          <h2>Client Login</h2>
+          <p>Access your existing corporate account and billing profile.</p>
+          
+          <form id="form-login">
+            <div class="form-group">
+              <label for="login-email" class="form-label">Corporate Email Address</label>
+              <input type="email" id="login-email" class="form-control" required placeholder="name@company.com">
+            </div>
+            
+            <div class="form-group">
+              <label for="login-password" class="form-label">Password</label>
+              <input type="password" id="login-password" class="form-control" required placeholder="Enter password">
+            </div>
+            
+            <div style="margin-top: 30px;">
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Access B2B Portal</button>
+            </div>
+          </form>
+          
+          <!-- Test accounts helper -->
+          <div style="margin-top: 25px; padding: 15px; background-color: var(--bg-light); border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 12px; color: var(--text-muted);">
+            <strong>Sample B2B Accounts for Testing:</strong>
+            <p style="margin-top:5px;">• Client: <code>corporate@client.com</code> / Pass: <code>password</code></p>
+            <p>• Admin: <code>admin@prmanufacturing.com</code> / Pass: <code>adminpassword</code></p>
+          </div>
+        </div>
+
+        <!-- Card 2: B2B Register -->
+        <div class="b2b-auth-card">
+          <h2>Register Corporate Client</h2>
+          <p>Register your company, startup, or school to unlock bulk pricing discounts.</p>
+          
+          <form id="form-register">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div class="form-group">
+                <label for="reg-company" class="form-label">Company / Institute Name</label>
+                <input type="text" id="reg-company" class="form-control" required placeholder="e.g. Apex Innovations">
+              </div>
+              <div class="form-group">
+                <label for="reg-gst" class="form-label">GSTIN ID (for B2B invoices)</label>
+                <input type="text" id="reg-gst" class="form-control" placeholder="15-digit GSTIN number">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div class="form-group">
+                <label for="reg-email" class="form-label">Corporate Email</label>
+                <input type="email" id="reg-email" class="form-control" required placeholder="name@company.com">
+              </div>
+              <div class="form-group">
+                <label for="reg-password" class="form-label">Password</label>
+                <input type="password" id="reg-password" class="form-control" required placeholder="Create password">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 15px;">
+              <div class="form-group">
+                <label for="reg-contact" class="form-label">Contact Person Name</label>
+                <input type="text" id="reg-contact" class="form-control" required placeholder="e.g. Rajesh Sharma">
+              </div>
+              <div class="form-group">
+                <label for="reg-phone" class="form-label">Contact Phone</label>
+                <input type="tel" id="reg-phone" class="form-control" required placeholder="+91 98765 43210">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-address" class="form-label">Default Shipping Delivery Address</label>
+              <textarea id="reg-address" class="form-control" rows="2" placeholder="Full delivery location shipping address..."></textarea>
+            </div>
+
+            <div style="margin-top: 30px;">
+              <button type="submit" class="btn btn-secondary" style="width: 100%;">Create B2B Account</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Logged In Portal: Dashboard Dashboard tabs -->
+      <div class="profile-dashboard-layout" id="b2b-dashboard-portal" style="display: none;">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="profile-sidebar">
+          <div class="profile-sidebar-header">
+            <div class="profile-avatar-box" id="avatar-letter">C</div>
+            <h3 id="sidebar-company-name">Company Name</h3>
+            <span id="sidebar-user-email">email@company.com</span>
+          </div>
+          
+          <ul class="profile-nav-links">
+            <li>
+              <button class="profile-nav-btn active" data-tab="tab-profile">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Company Profile
+              </button>
+            </li>
+            <li>
+              <button class="profile-nav-btn" data-tab="tab-orders">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg> Order History
+              </button>
+            </li>
+            <li>
+              <button class="profile-nav-btn" data-tab="tab-quotes">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg> Custom Quote Logs
+              </button>
+            </li>
+            <li class="admin-only-link" style="display: none;">
+              <a href="admin.html" class="profile-nav-btn" style="color: var(--secondary); border: 1px dashed var(--secondary);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="21" x2="9" y2="9"></line><line x1="3" y1="9" x2="21" y2="9"></line></svg> Admin Console
+              </a>
+            </li>
+            <li style="margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 15px;">
+              <button class="profile-nav-btn logout-btn" id="btn-logout" style="color: #ef4444;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Log Out Account
+              </button>
+            </li>
+          </ul>
+        </aside>
+
+        <!-- Right Content Panels -->
+        <section class="profile-content-panel">
+          
+          <!-- Pane 1: Profile -->
+          <div class="profile-pane" id="tab-profile">
+            <h2>Corporate Profile</h2>
+            <p class="text-muted">Manage your organization's registration data, tax billing settings, and shipping targets.</p>
+            
+            <form id="form-update-profile">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="form-group">
+                  <label for="upd-company" class="form-label">Company Name</label>
+                  <input type="text" id="upd-company" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="upd-gst" class="form-label">GSTIN Number</label>
+                  <input type="text" id="upd-gst" class="form-control">
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px;">
+                <div class="form-group">
+                  <label for="upd-contact" class="form-label">Contact Person Name</label>
+                  <input type="text" id="upd-contact" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="upd-phone" class="form-label">Contact Phone</label>
+                  <input type="tel" id="upd-phone" class="form-control" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="upd-billing" class="form-label">Billing Address</label>
+                <textarea id="upd-billing" class="form-control" rows="2"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="upd-shipping" class="form-label">Shipping Delivery Address</label>
+                <textarea id="upd-shipping" class="form-control" rows="2"></textarea>
+              </div>
+
+              <div style="margin-top: 30px; text-align: right;">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Pane 2: Orders History -->
+          <div class="profile-pane" id="tab-orders" style="display: none;">
+            <h2>B2B Order History</h2>
+            <p class="text-muted">Review production status, download PDF invoices, and trigger quick item re-orders.</p>
+            
+            <table class="orders-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Date</th>
+                  <th>Quantity / Apparel</th>
+                  <th>Total Cost</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="orders-table-body">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pane 3: Custom Quotes -->
+          <div class="profile-pane" id="tab-quotes" style="display: none;">
+            <h2>Custom Apparel Quote Logs</h2>
+            <p class="text-muted">Check evaluation status for fully custom print runs and bulk queries.</p>
+            
+            <table class="orders-table">
+              <thead>
+                <tr>
+                  <th>Quote ID</th>
+                  <th>Date</th>
+                  <th>Apparel Request</th>
+                  <th>Qty</th>
+                  <th>Deadline</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="quotes-table-body">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Dynamic Footer -->
+  <footer id="global-footer"></footer>
+
+  <!-- Scripts -->
+  <script src="js/db.js"></script>
+  <script src="js/shopify.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      renderAuthStates();
+      setupAuthForms();
+      setupDashboardEvents();
+    });
+
+    function renderAuthStates() {
+      const guestPanel = document.getElementById("b2b-auth-portal");
+      const dashPanel = document.getElementById("b2b-dashboard-portal");
+      
+      const user = window.AuthService.getCurrentUser();
+      
+      if (user) {
+        guestPanel.style.display = "none";
+        dashPanel.style.display = "grid";
+        
+        // Populate sidebar
+        document.getElementById("sidebar-company-name").textContent = user.companyName;
+        document.getElementById("sidebar-user-email").textContent = user.email;
+        document.getElementById("avatar-letter").textContent = user.companyName.charAt(0).toUpperCase();
+
+        // If admin, show admin route
+        if (window.AuthService.isAdmin()) {
+          document.querySelector(".admin-only-link").style.display = "block";
+        } else {
+          document.querySelector(".admin-only-link").style.display = "none";
+        }
+
+        // Populate forms
+        document.getElementById("upd-company").value = user.companyName;
+        document.getElementById("upd-gst").value = user.gstin;
+        document.getElementById("upd-contact").value = user.contactPerson;
+        document.getElementById("upd-phone").value = user.phone;
+        document.getElementById("upd-billing").value = user.billingAddress || "";
+        document.getElementById("upd-shipping").value = user.shippingAddress || "";
+
+        // Populate tables
+        renderOrdersHistory(user.email);
+        renderQuotesHistory(user.email);
+      } else {
+        dashPanel.style.display = "none";
+        guestPanel.style.display = "grid";
+      }
+    }
+
+    function setupAuthForms() {
+      // Login Form
+      document.getElementById("form-login").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("login-email").value.trim();
+        const pass = document.getElementById("login-password").value;
+        
+        const result = window.AuthService.login(email, pass);
+        if (result.success) {
+          showNotification("Login Successful! Welcome to the B2B portal.");
+          renderAuthStates();
+        } else {
+          showNotification(result.message, "error");
+        }
+      });
+
+      // Register Form
+      document.getElementById("form-register").addEventListener("submit", (e) => {
+        e.preventDefault();
+        
+        const regData = {
+          email: document.getElementById("reg-email").value.trim(),
+          password: document.getElementById("reg-password").value,
+          companyName: document.getElementById("reg-company").value.trim(),
+          gstin: document.getElementById("reg-gst").value.trim(),
+          phone: document.getElementById("reg-phone").value.trim(),
+          contactPerson: document.getElementById("reg-contact").value.trim(),
+          shippingAddress: document.getElementById("reg-address").value.trim()
+        };
+
+        const result = window.AuthService.register(regData);
+        if (result.success) {
+          showNotification("Corporate account registered successfully!");
+          renderAuthStates();
+        } else {
+          showNotification(result.message, "error");
+        }
+      });
+
+      // Profile Update Form
+      document.getElementById("form-update-profile").addEventListener("submit", (e) => {
+        e.preventDefault();
+        
+        const updateData = {
+          companyName: document.getElementById("upd-company").value.trim(),
+          gstin: document.getElementById("upd-gst").value.trim(),
+          contactPerson: document.getElementById("upd-contact").value.trim(),
+          phone: document.getElementById("upd-phone").value.trim(),
+          billingAddress: document.getElementById("upd-billing").value.trim(),
+          shippingAddress: document.getElementById("upd-shipping").value.trim()
+        };
+
+        const result = window.AuthService.updateProfile(updateData);
+        if (result.success) {
+          showNotification("Corporate profile metrics updated.");
+          renderAuthStates();
+        } else {
+          showNotification(result.message, "error");
+        }
+      });
+    }
+
+    function setupDashboardEvents() {
+      // Tab switcher
+      const navBtns = document.querySelectorAll(".profile-nav-btn[data-tab]");
+      navBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          navBtns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+
+          const targetPane = btn.getAttribute("data-tab");
+          document.querySelectorAll(".profile-pane").forEach(pane => {
+            pane.style.display = "none";
+          });
+          document.getElementById(targetPane).style.display = "block";
+        });
+      });
+
+      // Logout handler
+      document.getElementById("btn-logout").addEventListener("click", () => {
+        window.AuthService.logout();
+        showNotification("Logged out successfully.");
+        renderAuthStates();
+      });
+    }
+
+    function renderOrdersHistory(email) {
+      const orders = window.PR_DB.getOrders().filter(o => o.userEmail === email);
+      const tbody = document.getElementById("orders-table-body");
+      
+      if (orders.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="text-center text-muted">You haven't placed any bulk orders yet.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = orders.map(order => {
+        const itemNames = order.items.map(i => `${i.qty} x ${i.name}`).join("<br>");
+        const itemsQty = order.items.reduce((sum, i) => sum + i.qty, 0);
+        return `
+          <tr>
+            <td><strong>${order.id}</strong></td>
+            <td>${order.date}</td>
+            <td style="font-size:12px;">${itemNames}</td>
+            <td>₹${order.total.toLocaleString()}</td>
+            <td><span class="status-pill status-${order.status.toLowerCase().replace(' ', '-')}">${order.status}</span></td>
+            <td>
+              <div style="display:flex; flex-direction:column; gap:5px;">
+                <a href="tracking.html?orderId=${order.id}" class="btn-action text-center" style="font-size:11px; padding:4px 8px;">Track</a>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="reorderPrevious('${order.id}')" style="font-size:11px; padding:4px 8px;">Reorder</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderQuotesHistory(email) {
+      const quotes = window.PR_DB.getQuotes().filter(q => q.userEmail === email);
+      const tbody = document.getElementById("quotes-table-body");
+      
+      if (quotes.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="text-center text-muted">No custom designs quote inquiries logged.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = quotes.map(quote => `
+        <tr>
+          <td><strong>${quote.id}</strong></td>
+          <td>${quote.date}</td>
+          <td>${quote.apparelType}</td>
+          <td>${quote.qty} Units</td>
+          <td>${quote.deadline}</td>
+          <td><span class="status-pill status-${quote.status.toLowerCase()}">${quote.status}</span></td>
+        </tr>
+      `).join('');
+    }
+
+    // Auto-reorder utility: copies items back into cart
+    function reorderPrevious(orderId) {
+      const order = window.PR_DB.getOrderById(orderId);
+      if (!order) return;
+
+      order.items.forEach(item => {
+        const product = window.PR_DB.getProductById(item.id);
+        const cartItem = {
+          id: item.id,
+          name: item.name,
+          category: product ? product.category : "t-shirt",
+          qty: item.qty,
+          color: item.color,
+          size: item.size,
+          image: product ? product.images[0] : "img/placeholder_logo.png",
+          customization: item.customization ? { ...item.customization } : null
+        };
+        window.ShopifyService.addToCart(cartItem);
+      });
+
+      showNotification("Previous order items copied to cart. Redirecting...");
+      setTimeout(() => {
+        window.location.href = "cart.html";
+      }, 1000);
+    }
+
+    function showNotification(msg, type = "success") {
+      const container = document.createElement("div");
+      container.className = `toast-notification ${type}`;
+      container.innerHTML = `<span>${msg}</span>`;
+      document.body.appendChild(container);
+      
+      setTimeout(() => container.classList.add("show"), 100);
+      setTimeout(() => {
+        container.classList.remove("show");
+        setTimeout(() => container.remove(), 300);
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
